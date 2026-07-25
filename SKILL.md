@@ -145,6 +145,18 @@ Define these states before implementing any non-trivial screen. Keep dimensions 
 - For server-side tables, send separate query structures for fuzzy search, exact filters, and ordered sort clauses. Do not concatenate them into an ambiguous free-text query.
 - Apply search and filters before pagination. When the query changes, reset to a valid page while preserving page size and sort order.
 
+### Data Access and Query Performance
+
+- Never ship an N+1 query path. Load table rows and their required related data with an appropriate join, eager loading, batching, or a dedicated aggregate query.
+- Bound the number of database queries per table request independently of the returned row count. Add an integration test or query-count assertion for relationship-heavy endpoints when the backend test stack supports it.
+- Do not query production-sized tables without indexes that match the actual search, exact-filter, join, and sort patterns.
+- Index foreign keys used in joins, fields used for exact filters, and columns used for common ordering. Use composite indexes when a frequent query filters and sorts by multiple columns in a stable order.
+- Use a suitable full-text, trigram, or search-engine index for fuzzy search on large datasets. Do not apply an unindexed leading-wildcard scan across an unbounded table.
+- Verify representative queries with the database's query-plan tool, such as `EXPLAIN` or `EXPLAIN ANALYZE`. Confirm that expected indexes are used and that scanned rows remain proportional to the requested result set.
+- Keep pagination bounded and deterministic with a stable tie-breaker. Prefer cursor pagination for large or frequently changing datasets when offset pagination becomes expensive or inconsistent.
+- Select only the fields needed by the table and its immediate interactions. Move expensive counts, aggregates, and secondary details into batched or explicitly requested queries.
+- Treat missing indexes, full-table scans on user-facing queries, and request-count growth per row as release-blocking defects.
+
 ## Layout and Responsive Behavior
 
 - Build from a stable content grid with a readable max width; let primary content breathe before adding side panels.
@@ -180,6 +192,7 @@ Before finishing, confirm:
 - No large card wraps the page, hero, primary workspace, settings body, or data table.
 - Every add/create workflow opens a modal whose main content is a semantic form.
 - Every data table supports fuzzy search, exact structured filters, and accessible multi-column sorting.
+- Table data paths contain no N+1 queries and use verified indexes for search, filters, joins, sorting, and pagination.
 - Buttons use icons where a familiar symbol is sufficient and text where the command needs clarity.
 - All controls have complete states and accessible names.
 - Text fits at mobile and desktop widths without overlap.
