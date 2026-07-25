@@ -136,6 +136,14 @@ Define these states before implementing any non-trivial screen. Keep dimensions 
 - Keep row actions discoverable without requiring hover alone. On mobile, convert secondary columns into a detail view rather than squeezing unreadable columns.
 - Preserve navigation context, show the current location, and provide a clear back path for nested workspaces.
 - When a table or list supports adding records, place a clear `Add` command in its toolbar. Open a form dialog from that command; refresh or insert the new row after successful submission without losing the user's table state.
+- Every data table must provide a global fuzzy search over its declared searchable columns. Debounce input, ignore casing where appropriate, trim whitespace, and clearly distinguish `no matching results` from a genuinely empty dataset.
+- Treat structured filters as exact queries. Selects, enums, IDs, statuses, dates, ranges, and boolean filters must map to explicit field predicates rather than fuzzy text matching.
+- Support multi-column sorting from sortable headers. Show direction on each active header and a visible priority indicator when more than one sort is active.
+- Use a predictable multi-sort gesture or control, such as `Shift` plus click or a dedicated sort menu, and expose an accessible equivalent for keyboard and touch users.
+- Cycle sorting through ascending, descending, and unsorted states. Provide a clear way to reset all search, filter, and sort state.
+- Preserve fuzzy search, exact filters, multi-sort order, pagination, page size, and selection when opening and closing dialogs or returning from detail views. Store shareable table state in URL parameters when routing supports it.
+- For server-side tables, send separate query structures for fuzzy search, exact filters, and ordered sort clauses. Do not concatenate them into an ambiguous free-text query.
+- Apply search and filters before pagination. When the query changes, reset to a valid page while preserving page size and sort order.
 
 ## Layout and Responsive Behavior
 
@@ -171,6 +179,7 @@ Before finishing, confirm:
 - No section is a decorative card inside another decorative card.
 - No large card wraps the page, hero, primary workspace, settings body, or data table.
 - Every add/create workflow opens a modal whose main content is a semantic form.
+- Every data table supports fuzzy search, exact structured filters, and accessible multi-column sorting.
 - Buttons use icons where a familiar symbol is sufficient and text where the command needs clarity.
 - All controls have complete states and accessible names.
 - Text fits at mobile and desktop widths without overlap.
