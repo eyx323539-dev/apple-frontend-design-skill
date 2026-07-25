@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apple Frontend Design"
+  short_description: "Build polished Apple-inspired product interfaces"
+  default_prompt: "Use $apple-frontend-design to build or refine this frontend with Apple-inspired visual hierarchy, Apple-style editorial content, Codex-like work surfaces, motion, accessibility, and responsive behavior."
