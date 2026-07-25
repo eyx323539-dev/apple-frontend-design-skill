@@ -89,6 +89,10 @@ Define these states before implementing any non-trivial screen. Keep dimensions 
 
 ### Dialogs and Confirmation Modals
 
+- Never use browser-native dialogs or blocking prompts, including `window.alert`, `window.confirm`, `window.prompt`, or a native `beforeunload` confirmation. This is a release-blocking defect.
+- Replace alerts with an application toast, inline status, or application dialog according to severity. Replace confirmations and prompts with the project's accessible modal/dialog component.
+- Disable native form-validation bubbles with `novalidate` when custom validation is implemented; render accessible inline validation and a form-level error summary instead.
+- Do not mix an application dialog system with browser-native prompts in fallback or error paths. Exceptions, network failures, and destructive actions must remain inside the same designed interaction system.
 - Use a dialog for a focused decision, confirmation, or short form; do not put an entire workflow in a dialog.
 - Give every dialog a visible title, concise description when needed, explicit primary and secondary actions, and a close button.
 - Set initial focus intentionally, trap focus while open, close on `Escape` when safe, and return focus to the trigger after closing.
@@ -214,6 +218,7 @@ Before finishing, confirm:
 - No screen contains large unexplained whitespace or a small centered page that fails to use the available viewport.
 - Page gutters, primary columns, headers, and toolbars have visually symmetric boundaries unless the information architecture explicitly requires otherwise.
 - Every add/create workflow opens a modal whose main content is a semantic form.
+- No workflow invokes a browser-native alert, confirmation, prompt, validation bubble, or unload dialog.
 - Every data table supports fuzzy search, exact structured filters, and accessible multi-column sorting.
 - Table data paths contain no N+1 queries and use verified indexes for search, filters, joins, sorting, and pagination.
 - Table headers, cells, and actions remain single-line at a stable row height; insufficient width uses horizontal scrolling or a responsive detail pattern, never text wrapping or column compression.
