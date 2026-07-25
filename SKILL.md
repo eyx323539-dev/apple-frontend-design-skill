@@ -11,7 +11,9 @@ Use this skill for the actual interface, not marketing copy about design. Inspec
 
 - Prefer clarity, hierarchy, restraint, and direct manipulation over decoration.
 - Make the product or primary task visible in the first viewport.
-- Use generous but purposeful whitespace; align content to a consistent grid.
+- Use compact, purposeful spacing; avoid large dead areas, isolated content islands, and empty screen regions that do not serve reading or interaction.
+- Fill the available viewport with the page's primary shell. Main application screens must use the full usable window height and width rather than appearing as a small centered canvas.
+- Keep horizontal gutters and content boundaries visually symmetrical unless an intentional navigation rail, inspector, or responsive composition requires an asymmetrical split.
 - Keep surfaces mostly unframed. Use cards only for repeated items, dialogs, and genuinely framed tools.
 - Never use a large card as the main page container, hero, dashboard canvas, settings page, table shell, or full-width section. Main content must sit directly on the page or within a restrained full-width band.
 - Do not simulate page structure with oversized rounded rectangles. Use spacing, dividers, typography, and background changes to establish hierarchy.
@@ -159,11 +161,13 @@ Define these states before implementing any non-trivial screen. Keep dimensions 
 
 ## Layout and Responsive Behavior
 
-- Build from a stable content grid with a readable max width; let primary content breathe before adding side panels.
+- Build from a stable full-window shell and content grid. Use symmetric responsive gutters and clear columns; do not leave large unused margins around the primary workspace.
+- Let long-form reading content use a readable measure inside a full-width page band, but keep adjacent utility space intentional and balanced rather than blank.
 - Design mobile first for task flow, then enhance for desktop. Do not merely shrink desktop layouts.
 - Collapse navigation predictably, keep primary actions reachable, and preserve visible context in sheets/dialogs.
 - Use CSS constraints such as `minmax`, `clamp` only for non-font dimensions, `aspect-ratio`, and `container` queries where useful.
 - Verify at narrow mobile, normal mobile, tablet, and wide desktop sizes. Text must never overlap, clip, or force accidental horizontal scrolling.
+- On desktop, inspect the full viewport rather than only a centered component. Remove unjustified whitespace and correct unequal left/right margins, uneven column gaps, and visually off-center toolbars.
 
 ## Accessibility
 
@@ -190,6 +194,8 @@ Before finishing, confirm:
 - The first viewport communicates the product and primary action.
 - No section is a decorative card inside another decorative card.
 - No large card wraps the page, hero, primary workspace, settings body, or data table.
+- No screen contains large unexplained whitespace or a small centered page that fails to use the available viewport.
+- Page gutters, primary columns, headers, and toolbars have visually symmetric boundaries unless the information architecture explicitly requires otherwise.
 - Every add/create workflow opens a modal whose main content is a semantic form.
 - Every data table supports fuzzy search, exact structured filters, and accessible multi-column sorting.
 - Table data paths contain no N+1 queries and use verified indexes for search, filters, joins, sorting, and pagination.
