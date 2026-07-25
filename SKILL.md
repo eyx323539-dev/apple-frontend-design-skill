@@ -135,6 +135,13 @@ Define these states before implementing any non-trivial screen. Keep dimensions 
 ### Tables, Lists, and Navigation
 
 - Define loading, no-results, empty, selected, hover, keyboard-focus, pagination, and bulk-action states.
+- Never squeeze a data table until headers or cell values wrap character-by-character, stack vertically, overlap, or create unusually tall rows. This is a release-blocking layout defect.
+- Keep table headers, IDs, statuses, protocol labels, IP addresses, timestamps, numeric values, and row actions on one line. Apply `white-space: nowrap`, a stable row height, and explicit minimum widths for every column.
+- Truncate long single-line values with an ellipsis rather than wrapping them. Expose the complete value through an accessible tooltip, `title`, copy action, or detail view; never require a user to infer hidden data.
+- If the viewport cannot fit the declared column minimums, preserve column widths and use a visible horizontal scroll region. Do not shrink columns below their content-safe minimum just to avoid scrolling.
+- On smaller screens, prioritize key columns and move secondary data into an expandable row, detail drawer, or dedicated detail view. Do not create a compressed desktop table on mobile.
+- Keep row actions on one line. Prefer compact icon buttons with tooltips or an overflow menu for secondary actions; never wrap action buttons into a vertical grid that inflates row height.
+- Give each table an explicit density and row-height contract. Do not let variable text wrapping change row height; reserve multi-line layouts for intentionally designed cards or detail views, not data grids.
 - Keep row actions discoverable without requiring hover alone. On mobile, convert secondary columns into a detail view rather than squeezing unreadable columns.
 - Preserve navigation context, show the current location, and provide a clear back path for nested workspaces.
 - When a table or list supports adding records, place a clear `Add` command in its toolbar. Open a form dialog from that command; refresh or insert the new row after successful submission without losing the user's table state.
@@ -199,6 +206,7 @@ Before finishing, confirm:
 - Every add/create workflow opens a modal whose main content is a semantic form.
 - Every data table supports fuzzy search, exact structured filters, and accessible multi-column sorting.
 - Table data paths contain no N+1 queries and use verified indexes for search, filters, joins, sorting, and pagination.
+- Table headers, cells, and actions remain single-line at a stable row height; insufficient width uses horizontal scrolling or a responsive detail pattern, never text wrapping or column compression.
 - Buttons use icons where a familiar symbol is sufficient and text where the command needs clarity.
 - All controls have complete states and accessible names.
 - Text fits at mobile and desktop widths without overlap.
