@@ -7,6 +7,8 @@ description: Build and refine polished Apple-inspired web interfaces with discip
 
 Use this skill for the actual interface, not marketing copy about design. Inspect the existing stack and preserve its conventions before introducing new dependencies.
 
+When the user provides an existing UI or screenshot, treat it as the visual source of truth. Preserve its established navigation, density, color roles, component language, and information architecture. Improve usability and consistency without replacing a successful admin/workbench design with a generic Apple marketing layout.
+
 ## Design Direction
 
 - Prefer clarity, hierarchy, restraint, and direct manipulation over decoration.
@@ -32,6 +34,14 @@ Use this skill for the actual interface, not marketing copy about design. Inspec
 - **Content tone:** Prefer specific, confident, plain-language copy. Keep headings short and literal; put detail in supporting text and progressive disclosure.
 
 Use Apple pages as a content and hierarchy reference, not as a request to copy trademarks, proprietary imagery, exact layouts, or text. Use original assets and product-specific copy.
+
+## Existing Admin Workbench Baseline
+
+- A full-window shell with a persistent left navigation rail, a clear top bar, a broad main workspace, and balanced page gutters is a valid baseline.
+- A compact row of KPI/stat tiles can establish status at the top of a dashboard, provided the tiles remain secondary to the main task and do not become oversized decorative cards.
+- Keep the practical density of an operations panel: visible filters and primary actions above a table, readable row spacing, restrained borders, and clear status colors.
+- Preserve established Chinese labels, status wording, action order, and table conventions when extending the same product. Do not translate or rename working UI without a product reason.
+- Keep visual polish subordinate to scanning: alignment, consistent column widths, stable row heights, and predictable actions matter more than extra decoration.
 
 ## Visual System
 
