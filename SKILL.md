@@ -13,6 +13,8 @@ Use this skill for the actual interface, not marketing copy about design. Inspec
 - Make the product or primary task visible in the first viewport.
 - Use generous but purposeful whitespace; align content to a consistent grid.
 - Keep surfaces mostly unframed. Use cards only for repeated items, dialogs, and genuinely framed tools.
+- Never use a large card as the main page container, hero, dashboard canvas, settings page, table shell, or full-width section. Main content must sit directly on the page or within a restrained full-width band.
+- Do not simulate page structure with oversized rounded rectangles. Use spacing, dividers, typography, and background changes to establish hierarchy.
 - Avoid generic SaaS gradients, glowing blobs, excessive glassmorphism, and nested cards.
 - Use real product imagery or meaningful bitmap assets when visuals need to communicate the object or state.
 - When presenting a product or feature, use Apple's editorial pattern: a direct product-first headline, concise supporting copy, one clear action, and the next section visible below the fold. Treat copy as part of the interface hierarchy, not filler.
@@ -81,6 +83,9 @@ Define these states before implementing any non-trivial screen. Keep dimensions 
 - Use a destructive confirmation only for irreversible or high-impact actions. State what will happen in plain language and use a specific action label such as `Delete project`, not `Confirm`.
 - Prevent accidental dismissal while a form is dirty or a destructive operation is in progress; offer a clear cancel path.
 - On mobile, use a bottom sheet or full-screen route when the content needs more room. Keep the primary action reachable above the safe area.
+- Implement every create/add action through a modal dialog. The dialog body must be a semantic, structured form with visible field labels, validation, submit progress, error recovery, and explicit cancel and submit actions.
+- Keep the page beneath an add dialog focused on browsing or managing existing data. Do not place a permanent add form above, beside, or inside the primary table/list.
+- If the add form is too complex for a focused dialog, split it into clear form steps within the dialog or use a full-screen modal on narrow screens; preserve the modal interaction contract.
 
 ### Popovers, Menus, and Tooltips
 
@@ -130,6 +135,7 @@ Define these states before implementing any non-trivial screen. Keep dimensions 
 - Define loading, no-results, empty, selected, hover, keyboard-focus, pagination, and bulk-action states.
 - Keep row actions discoverable without requiring hover alone. On mobile, convert secondary columns into a detail view rather than squeezing unreadable columns.
 - Preserve navigation context, show the current location, and provide a clear back path for nested workspaces.
+- When a table or list supports adding records, place a clear `Add` command in its toolbar. Open a form dialog from that command; refresh or insert the new row after successful submission without losing the user's table state.
 
 ## Layout and Responsive Behavior
 
@@ -163,6 +169,8 @@ Before finishing, confirm:
 
 - The first viewport communicates the product and primary action.
 - No section is a decorative card inside another decorative card.
+- No large card wraps the page, hero, primary workspace, settings body, or data table.
+- Every add/create workflow opens a modal whose main content is a semantic form.
 - Buttons use icons where a familiar symbol is sufficient and text where the command needs clarity.
 - All controls have complete states and accessible names.
 - Text fits at mobile and desktop widths without overlap.
